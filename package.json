@@ -1,0 +1,28 @@
+{
+  "name": "kenshoo-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect": "^3.7.0",
+    "download-npm-package": "^3.1.12",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "run-parallel": "^1.1.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayadahan/Kenshoo-Project.git"
+  },
+  "author": "Maya Dahan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayadahan/Kenshoo-Project/issues"
+  },
+  "homepage": "https://github.com/mayadahan/Kenshoo-Project#readme"
+}

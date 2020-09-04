@@ -1,0 +1,49 @@
+[
+  {
+    "imageId": 1,
+    "Objects": [
+      "Dog",
+      "Pizza"
+    ]
+  },
+  {
+    "imageId": 21,
+    "Objects": [
+      "Desk",
+      "Skirt",
+      "Door"
+    ]
+  },
+  {
+    "imageId": 2,
+    "Objects": [
+      "Cow",
+      "Person",
+      "Sunglasses"
+    ]
+  },
+  {
+    "imageId": 3,
+    "Objects": [
+      "Cow",
+      "Desk",
+      "Dog"
+    ]
+  },
+  {
+    "imageId": 4,
+    "Objects": [
+      "Door",
+      "Hand",
+      "Desk"
+    ]
+  },
+  {
+    "imageId": "maya",
+    "Objects": [
+      "Sea",
+      "Umbrella",
+      "Mountain"
+    ]
+  }
+]
