@@ -11,21 +11,35 @@ app.use(bodyParser.json());
 
 app.use("/", router);
 
+//Load the json file and return array of objects.
+function getData(){
+    var rawData = fs.readFileSync('./analyzer.json');
+    var obj = JSON.parse(rawData.toString());
+    return obj;
+}
+
+//Select 3 random values in order to "analyze" the image.
+function random_select(){
+    var obj = ["Dog", "Cat", "Person", "Hand", "Guitar", "Pizza", "Umbrella", "Desk", "Computer", "Door", "Sea", "Mountain", "Cow", "Smile", "Skirt", "Sunglasses", "Coffee", "Hamburger"];
+    const shuffled = obj.sort(() => 0.5 - Math.random());
+    var selected = shuffled.slice(0, 3);
+    return selected;
+}
+
+
 router.post('/add_image', (req,res) => {
     try{
         var url = req.body.imageUrl;
         var id = req.body.imageId;
-        
+
         if(!Number.isInteger(id))
         {
             res.status(400).send(`Invalid ID: ${id}`);
+            return;
         }
-        var obj = ["Dog", "Cat", "Person", "Hand", "Guitar", "Pizza", "Umbrella", "Desk", "Computer", "Door", "Sea", "Mountain", "Cow", "Smile", "Skirt", "Sunglasses", "Coffee", "Hamburger"];
-        const shuffled = obj.sort(() => 0.5 - Math.random());
-        var selected = shuffled.slice(0, 3);
+        var selected = random_select();
     
-        var rawData = fs.readFileSync('./analyzer.json');
-        var obj = JSON.parse(rawData.toString());
+        var obj = getData();
         for (var i = 0; i < obj.length; i++) {
                 if(obj[i].imageId === id){
                     res.status(400).send("Image id already exist");
@@ -38,12 +52,11 @@ router.post('/add_image', (req,res) => {
      
         res.status(200).send("Done"); 
         return;
+
     }catch(error){
         res.status(500).send(error);
         return;
     }
- 
-
 })
 
 router.get('/labels', (req,res) => {
@@ -51,11 +64,12 @@ router.get('/labels', (req,res) => {
         var labels = [];
         var id = req.query.imageId;
         if(!Number.isInteger(id))
-            {
-                res.status(400).send(`Invalid ID: ${id}`);
-            }
-        var rawData = fs.readFileSync('./analyzer.json');
-        var obj = JSON.parse(rawData.toString());
+        {
+            res.status(400).send(`Invalid ID: ${id}`);
+            return;
+        }
+
+        var obj = getData();
         for (var i = 0; i < obj.length; i++) {
                 if(obj[i].imageId == id){
                     labels = obj[i].Objects;
