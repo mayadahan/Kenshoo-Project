@@ -31,8 +31,11 @@ router.post('/add_image', (req,res) => {
     try{
         var url = req.body.imageUrl;
         var id = req.body.imageId;
-
-        if(!Number.isInteger(id))
+        if(url == undefined){
+            res.status(400).send(`Url is undefined`);
+            return;
+        }
+        if(!Number.isInteger(id) || id == undefined)
         {
             res.status(400).send(`Invalid ID: ${id}`);
             return;
