@@ -18,11 +18,12 @@ function getData(){
     return obj;
 }
 
-//Select 3 random values in order to "analyze" the image.
+//Select between 1-5 random values in order to "analyze" the image.
 function random_select(){
     var obj = ["Dog", "Cat", "Person", "Hand", "Guitar", "Pizza", "Umbrella", "Desk", "Computer", "Door", "Sea", "Mountain", "Cow", "Smile", "Skirt", "Sunglasses", "Coffee", "Hamburger"];
+    var n = Math.random() * (5 - 1) + 1;
     const shuffled = obj.sort(() => 0.5 - Math.random());
-    var selected = shuffled.slice(0, 3);
+    var selected = shuffled.slice(0, n);
     return selected;
 }
 
@@ -31,6 +32,7 @@ router.post('/add_image', (req,res) => {
     try{
         var url = req.body.imageUrl;
         var id = req.body.imageId;
+        //Parameters validation tests
         if(url == undefined){
             res.status(400).send(`Url is undefined`);
             return;
@@ -62,11 +64,18 @@ router.post('/add_image', (req,res) => {
     }
 })
 
+//Checks if the parameter is a valid int
+function isInt(id) {
+    var n = Math.floor(Number(id));
+    return n !== Infinity && String(n) === id && n >= 0;
+}
+
 router.get('/labels', (req,res) => {
     try{   
         var labels = [];
         var id = req.query.imageId;
-        if(!Number.isInteger(id))
+
+        if(!isInt(id) || id == undefined)
         {
             res.status(400).send(`Invalid ID: ${id}`);
             return;

@@ -25,25 +25,16 @@
   {
     "imageId": 3,
     "Objects": [
-      "Door",
-      "Coffee",
-      "Person"
+      "Skirt",
+      "Cat"
     ]
   },
   {
     "imageId": 4,
     "Objects": [
-      "Hand",
       "Sunglasses",
-      "Desk"
-    ]
-  },
-  {
-    "imageId": 5,
-    "Objects": [
-      "Hand",
-      "Sunglasses",
-      "Pizza"
+      "Umbrella",
+      "Person"
     ]
   }
 ]

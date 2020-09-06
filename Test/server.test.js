@@ -6,7 +6,6 @@ parallel([
     async function(){
         let res = await fetch('http://localhost:8080/add_image', {method: 'POST', headers: {
             'Content-Type': 'application/json'}, body: JSON.stringify({"imageUrl": "url", "imageId": 3})});
-        let id1 = await res.text();
         console.log("USER1 add image: ", res.ok ? "OK" : "Failure");
 
         res = await fetch(`http://localhost:8080/add_image`, {method: 'POST', headers: {
@@ -27,6 +26,9 @@ parallel([
             console.log("USER1 id already exist (400 status): ", (res.status == 400 && text === 'Image id already exist') ? "OK" : "Failure");
         });
 
+        res = await fetch(`http://localhost:8080/labels?imageId=2`, {method: 'GET'});
+        console.log("USER1 labels: ", res.ok ? "OK" : "Failure");
+
         res = await fetch(`http://localhost:8080/labels?imageId=maya`, {method: 'GET'});
         res.text().then(function(text) {
             console.log("USER1 invalid ID on GET request(400 status): ", (res.status == 400 && text === 'Invalid ID: maya') ? "OK" : "Failure");
@@ -42,7 +44,6 @@ parallel([
     async function(){
         let res = await fetch('http://localhost:8080/add_image', {method: 'POST', headers: {
             'Content-Type': 'application/json'}, body: JSON.stringify({"imageUrl": "url", "imageId": 4})});
-        let id1 = await res.text();
         console.log("USER2 add image: ", res.ok ? "OK" : "Failure");
 
         res = await fetch(`http://localhost:8080/add_image`, {method: 'POST', headers: {
@@ -62,6 +63,9 @@ parallel([
         res.text().then(function(text) {
             console.log("USER2 id already exist (400 status): ", (res.status == 400 && text === 'Image id already exist') ? "OK" : "Failure");
         });
+
+        res = await fetch(`http://localhost:8080/labels?imageId=2`, {method: 'GET'});
+        console.log("USER1 labels: ", res.ok ? "OK" : "Failure");
 
         res = await fetch(`http://localhost:8080/labels?imageId=maya`, {method: 'GET'});
         res.text().then(function(text) {
